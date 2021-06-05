@@ -1,5 +1,10 @@
 export const HEADER_TITLE = "Pull Requests Dashboard";
 
+export const SORT_ORDERS = {
+  ASC: "asc",
+  DESC: "desc",
+};
+
 export const FILTER_OPTIONS = {
   STATUS: "Status",
   LABEL: "Label",

@@ -2,6 +2,7 @@ import React from "react";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
+import { SORT_ORDERS } from "../../../Utils/consts";
 
 const SortOption = ({ name, isChecked, handleChange }) => {
   return (
@@ -10,7 +11,7 @@ const SortOption = ({ name, isChecked, handleChange }) => {
         control={
           <Switch checked={isChecked} onChange={handleChange} color="primary" />
         }
-        label={`${name} ${isChecked ? 'asc' : 'desc'}`}
+        label={`${name} ${isChecked ? SORT_ORDERS.ASC : SORT_ORDERS.DESC}`}
         value={name}
         labelPlacement="top"
       />
