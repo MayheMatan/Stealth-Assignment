@@ -46,23 +46,23 @@ const MainScreen = () => {
     [prList, isNumberSortChecked, isTitleSortChecked]
   );
 
-  const handleStatusChange = (event) => {
+  const handleStatusChange = useCallback((event) => {
     setStatusFilter(event.target.value);
     setIsStatusFilterOpen(false);
-  };
+  }, []);
 
-  const handleLabelChange = (event) => {
+  const handleLabelChange = useCallback((event) => {
     setLabelFilter(event.target.value);
     setIsLabelFilterOpen(false);
-  };
+  }, []);
 
-  const toggleStatusSelect = () => {
+  const toggleStatusSelect = useCallback(() => {
     setIsStatusFilterOpen(!isStatusFilterOpen);
-  };
+  }, []);
 
-  const toggleLabelSelect = () => {
+  const toggleLabelSelect = useCallback(() => {
     setIsLabelFilterOpen(!isStatusFilterOpen);
-  };
+  }, []);
 
   return prList ? (
     <MainScreenTemplate
