@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { PR_STATUSES, SORT_OPTIONS } from "../../../Utils/consts";
 import { useFetchPullRequests } from "../../../Utils/hooks";
 import {
@@ -18,30 +18,33 @@ const MainScreen = () => {
   const [isNumberSortChecked, setIsNumberSortChecked] = useState(false);
   const [isTitleSortChecked, setIsTitleSortChecked] = useState(false);
 
-  const handleSortChange = (event) => {
-    switch (event.target.value) {
-      case SORT_OPTIONS.TITLE: {
-        setIsNumberSortChecked(false);
-        setIsTitleSortChecked(!isTitleSortChecked);
-        if (isTitleSortChecked) {
-          setPrList(prList.sort((a, b) => b.title.localeCompare(a.title)));
-        } else {
-          setPrList(prList.sort((a, b) => a.title.localeCompare(b.title)));
+  const handleSortChange = useCallback(
+    (event) => {
+      switch (event.target.value) {
+        case SORT_OPTIONS.TITLE: {
+          setIsNumberSortChecked(false);
+          setIsTitleSortChecked(!isTitleSortChecked);
+          if (isTitleSortChecked) {
+            setPrList(prList.sort((a, b) => b.title.localeCompare(a.title)));
+          } else {
+            setPrList(prList.sort((a, b) => a.title.localeCompare(b.title)));
+          }
+          break;
         }
-        break;
-      }
-      case SORT_OPTIONS.PR_NUMBER: {
-        setIsTitleSortChecked(false);
-        setIsNumberSortChecked(!isNumberSortChecked);
-        if (isNumberSortChecked) {
-          setPrList(prList.sort((a, b) => b.number - a.number));
-        } else {
-          setPrList(prList.sort((a, b) => a.number - b.number));
+        case SORT_OPTIONS.PR_NUMBER: {
+          setIsTitleSortChecked(false);
+          setIsNumberSortChecked(!isNumberSortChecked);
+          if (isNumberSortChecked) {
+            setPrList(prList.sort((a, b) => b.number - a.number));
+          } else {
+            setPrList(prList.sort((a, b) => a.number - b.number));
+          }
+          break;
         }
-        break;
       }
-    }
-  };
+    },
+    [prList, isNumberSortChecked, isTitleSortChecked]
+  );
 
   const handleStatusChange = (event) => {
     setStatusFilter(event.target.value);
